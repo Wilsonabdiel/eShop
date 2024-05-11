@@ -42,6 +42,28 @@ return [
         ],
     ],
 
+
+
+    'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+
+    'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+    'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+            'hash' => false,
+        ],
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -65,10 +87,14 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+//         'users' => [
+//             'driver' => 'database',
+//             'table' => 'users',
+//         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -96,6 +122,11 @@ return [
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 
